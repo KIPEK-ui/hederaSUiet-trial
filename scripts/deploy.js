@@ -3,9 +3,12 @@ async function main() {
 
     console.log("Deploying contracts with the account:", deployer.address);
 
-    // The deployer will also be the woner of our NFT contract
-    const MyToken = await ethers.getContractFactory("HederaSUiet", deployer);
-    const contract = await MyToken.deploy(deployer.address);
+    // Get the contract factory for the ERC-20 token
+    const ERC20Token = await ethers.getContractFactory("HederaSUiet", deployer);
+
+    // Deploy the contract with the required parameters
+    const initialSupply = ethers.utils.parseUnits("1000000", 18); // Adjust initial supply as needed
+    const contract = await ERC20Token.deploy(initialSupply);
 
     console.log("Contract deployed at:", contract.target);
 }
