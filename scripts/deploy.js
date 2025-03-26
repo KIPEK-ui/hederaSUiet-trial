@@ -1,4 +1,5 @@
 async function main() {
+    const { ethers } = require("hardhat");
     const [deployer] = await ethers.getSigners();
 
     console.log("Deploying contracts with the account:", deployer.address);
@@ -7,8 +8,7 @@ async function main() {
     const ERC20Token = await ethers.getContractFactory("HederaSUiet", deployer);
 
     // Deploy the contract with the required parameters
-    const initialSupply = ethers.utils.parseUnits("1000000", 18); // Adjust initial supply as needed
-    const contract = await ERC20Token.deploy(initialSupply);
+    const contract = await ERC20Token.deploy();
 
     console.log("Contract deployed at:", contract.target);
 }
